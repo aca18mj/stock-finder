@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Michal Jarmocik">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 10px;
+      z-index: 0;
+    }
+
+    #map:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: block;
+      z-index: 10;
+      pointer-events: none;
+
+      -webkit-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+  <title>Finder</title>
+</head>
+
+<body class="bg-light">
+  <!-- Search box -->
+  <div class="container py-3">
+    <div class="form-row">
+      <div class="form-group col-md-11">
+        <input onClick="this.select()" type="url" class="form-control" id="input" placeholder="Enter url">
+      </div>
+      <div class="form-group col-md-1">
+        <button id="button" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+
+  <div id='map'></div>
+
+  <!-- Loading animation-->
+  <div class="d-flex justify-content-center" id="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row mx-auto" id="list_container">
+      <div class="col-sm text-center">
+        <h1 class="display-4">England</h1>
+        <ul class="list-group" id="england_container">
+
+        </ul>
+      </div>
+      <div class="col-sm text-center">
+        <h1 class="display-4">Scotland</h1>
+        <ul class="list-group" id="scotland_container">
+
+        </ul>
+      </div>
+      <div class="col-sm text-center">
+        <h1 class="display-4">Wales</h1>
+        <ul class="list-group" id="wales_container">
+
+        </ul>
+      </div>
+      <div class="col-sm text-center">
+        <h1 class="display-4">NIr</h1>
+        <ul class="list-group" id="nir_container">
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <footer class="pt-4 my-md-5 border-top">
+
+    </footer>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="client.js"></script>
+</body>
+
+</html>
