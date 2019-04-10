@@ -47,18 +47,16 @@ function testCov() {
 }
 
 function insertMap() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWNhMThtaiIsImEiOiJjanU5eGs5NXcwbnhrNDBwZGw3MmxrdmwxIn0.eu-FlYkpu7WHxL1W45XEwg';
-    map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-1.8, 54],
-        zoom: 4.8
-    });
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWNhMThtaiIsImEiOiJjanU5eGs5NXcwbnhrNDBwZGw3MmxrdmwxIn0.eu-FlYkpu7WHxL1W45XEwg';
+
+    map = L.mapbox.map('map')
+        .setView([53.8603, -2.3741], 5.4)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 }
 
 function clear() {
     for (var i = 0; i < markers.length; i++) {
-        markers[i].remove();
+        map.removeLayer(markers[i]);
     }
     markers = [];
 
@@ -70,9 +68,13 @@ function clear() {
 
 function draw(data) {
     for (var i = 0; i < data.length; i++) {
-        var marker = new mapboxgl.Marker()
-            .setLngLat([data[i]['Lon'], data[i]['Lat']])
-            .addTo(map);
+
+        var marker = L.marker([data[i]['Lat'], data[i]['Lon']], {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '#f86767'
+            })
+        }).addTo(map);
+
         markers.push(marker);
     }
 }

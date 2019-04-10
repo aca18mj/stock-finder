@@ -2,13 +2,22 @@
 <html lang="en">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138043329-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-138043329-1');
+  </script>
   <meta charset="utf-8">
   <meta name="author" content="Michal Jarmocik">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
   <style>
     #map {
       width: 100%;
@@ -28,12 +37,19 @@
       z-index: 10;
       pointer-events: none;
 
-      -webkit-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow:
+        inset 0px 11px 10px -10px rgba(0, 0, 0, 0.3),
+        inset 0px -11px 10px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow:
+        inset 0px 11px 10px -10px rgba(0, 0, 0, 0.3),
+        inset 0px -11px 10px -10px rgba(0, 0, 0, 0.3);
+      box-shadow:
+        inset 0px 11px 10px -10px rgba(0, 0, 0, 0.3),
+        inset 0px -11px 10px -10px rgba(0, 0, 0, 0.3);
     }
   </style>
-  <title>Finder</title>
+
+  <title>Stock finder</title>
 </head>
 
 <body class="bg-light">
@@ -89,7 +105,8 @@
 
   <div class="container">
     <footer class="pt-4 my-md-5 border-top">
-        <a href="https://github.com/aca18mj/stock-find-firebase"><img src="GitHub-Mark-64px.png" class="rounded mx-auto d-block" width="32" heigth="32"></a>
+      <a href="https://github.com/aca18mj/stock-find-firebase"><img src="GitHub-Mark-64px.png"
+          class="rounded mx-auto d-block" width="32" heigth="32"></a>
     </footer>
   </div>
 
