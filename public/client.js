@@ -30,7 +30,7 @@ function onButtonClicked() {
     }
 
     loading.setAttribute('style', 'visibility:true');
-    jQuery.get("https://us-central1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {
+    jQuery.get("https://europe-west1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {
         loading.setAttribute('style', 'visibility:hidden');
         makeTables(data);
         draw(data);
