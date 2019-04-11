@@ -4,10 +4,10 @@ const cors = require('cors')({
 })
 const MongoClient = require('mongodb').MongoClient;
 const request = require('request-promise');
-const url = "mongodb://" + functions.config().database.username + ":" + functions.config().database.password +  "@ds111765.mlab.com:11765/stores";
+const url = "mongodb://" + functions.config().database.username + ":" + functions.config().database.password + "@ds111765.mlab.com:11765/stores";
 
-const stores_load = async function() {
-  const client = new MongoClient(url, {useNewUrlParser: true});
+const stores_load = async function () {
+  const client = new MongoClient(url, { useNewUrlParser: true });
   await client.connect();
   const db = client.db('stores');
   const collection = db.collection('all_stores');
@@ -26,41 +26,50 @@ const scrap_data = async function (stores, product_id) {
 
   for (var i = 0; i < stores.length; i++) {
 
-      urls[i] = 'http://www.currys.co.uk/gb/uk/mcd_postcode_check/sProductId/'
-              + product_id
-              + '/sPostCode/'
-              + stores[i]['Code']
-              + '/latitude/'
-              + stores[i]['Lat']
-              + '/longitude/'
-              + stores[i]['Lon']
-              + '/ajax.html';
+    urls[i] = 'http://www.currys.co.uk/gb/uk/mcd_postcode_check/sProductId/'
+      + product_id
+      + '/sPostCode/'
+      + stores[i]['Code']
+      + '/latitude/'
+      + stores[i]['Lat']
+      + '/longitude/'
+      + stores[i]['Lon']
+      + '/ajax.html';
   }
 
   var promises = urls.map(url => request(url));
 
   await Promise.all(promises).then((data) => {
-      var results;
-      for (var i = 0; i < stores.length; i++) {
-          if ((results = reg.exec(data[i])) !== null && results[1] < 2)
-              return_array.push({'Country': stores[i]['Country'], 'Town': stores[i]['Town'], 'Lon': stores[i]['Lon'], 'Lat': stores[i]['Lat']});
-      }
+    var results;
+    for (var i = 0; i < stores.length; i++) {
+      if ((results = reg.exec(data[i])) !== null && results[1] < 2)
+        return_array.push({ 'Country': stores[i]['Country'], 'Town': stores[i]['Town'], 'Lon': stores[i]['Lon'], 'Lat': stores[i]['Lat'] });
+    }
   })
 
   return return_array;
 }
 
-exports.check = functions.https.onRequest( (req, res) => {
-  return cors(req, res, async () => {
-    let stores = await stores_load();
-    let product_code = /\d+/.exec(req.path);
-    let results = await scrap_data(stores, product_code[0]); 
-    res.status(200).send(results);
+exports.check = functions
+  .region('europe-west1')
+  .https
+  .onRequest((req, res) => {
+    return cors(req, res, async () => {
+      let stores = await stores_load();
+      let product_code = /\d{8}/.exec(req.path);
+
+      if (product_code[0] == null) {
+        res.status(400).send("Invalid product code");
+        return;
+      }
+      
+      let results = await scrap_data(stores, product_code[0]);
+      res.status(200).send(results);
+    });
   });
-});
 
 exports.coverage = functions.https.onRequest((req, res) => {
-  return cors(req, res, async() => {
+  return cors(req, res, async () => {
     let stores = await stores_load();
     res.status(200).send(stores);
   })
