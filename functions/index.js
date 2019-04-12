@@ -58,19 +58,22 @@ exports.check = functions
       let stores = await stores_load();
       let product_code = /\d{8}/.exec(req.path);
 
-      if (product_code[0] == null) {
-        res.status(400).send("Invalid product code");
+      if (product_code == null) {
+        res.status(400).end();
         return;
       }
-      
+
       let results = await scrap_data(stores, product_code[0]);
       res.status(200).send(results);
     });
   });
 
-exports.coverage = functions.https.onRequest((req, res) => {
-  return cors(req, res, async () => {
-    let stores = await stores_load();
-    res.status(200).send(stores);
+exports.coverage = functions
+  .region('europe-west1')
+  .https
+  .onRequest((req, res) => {
+    return cors(req, res, async () => {
+      let stores = await stores_load();
+      res.status(200).send(stores);
+    })
   })
-})
