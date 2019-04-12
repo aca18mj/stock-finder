@@ -3,6 +3,10 @@ button.addEventListener('click', onButtonClicked);
 var loading = document.getElementById('loading');
 loading.setAttribute('style', 'visibility:hidden')
 var input = document.getElementById('input');
+input.addEventListener('keyup', (event) => {
+    if (event.keyCode === 13)
+        onButtonClicked();
+})
 var container = document.getElementById('list_container');
 container.setAttribute('style', 'visibility:hidden');
 
@@ -111,7 +115,6 @@ function makeTables(data) {
                 break;
         }
     }
-
 }
 
 insertMap();
