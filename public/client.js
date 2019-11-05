@@ -72,12 +72,16 @@ function clear() {
 
 function draw(data) {
     for (var i = 0; i < data.length; i++) {
+        var popup = L.popup({closeButton : false})
+                        .setContent('<p>' + data[i]['Town'] + '</p>')
 
         var marker = L.marker([data[i]['Lat'], data[i]['Lon']], {
             icon: L.mapbox.marker.icon({
                 'marker-color': '#f86767'
             })
-        }).addTo(map);
+        })
+        .bindPopup(popup)
+        .addTo(map);
 
         markers.push(marker);
     }
