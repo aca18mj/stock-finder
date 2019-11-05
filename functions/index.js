@@ -26,7 +26,7 @@ const scrap_data = async function (stores, product_id) {
 
   for (var i = 0; i < stores.length; i++) {
 
-    urls[i] = 'http://www.currys.co.uk/gb/uk/mcd_postcode_check/sProductId/'
+    urls[i] = 'https://www.currys.co.uk/gb/uk/mcd_postcode_check/sProductId/'
       + product_id
       + '/sPostCode/'
       + stores[i]['Code']
@@ -76,4 +76,16 @@ exports.coverage = functions
       let stores = await stores_load();
       res.status(200).send(stores);
     })
+  })
+
+
+exports.testing = functions
+  .region('europe-west1')
+  .https
+  .onRequest((req, res) => {
+    let url = "https://www.currys.co.uk/gb/uk/mcd_postcode_check/sProductId/10193334/sPostCode/S37LG/latitude/53.387707/longitude/-1.479336/ajax.html"
+    request(url)
+      .then((data) => {
+        res.status(200).send(data)
+      })
   })
