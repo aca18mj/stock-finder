@@ -34,9 +34,14 @@ function onButtonClicked() {
     }
 
     loading.setAttribute('style', 'visibility:true');
-    jQuery.get("https://europe-west1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {       
-        makeTables(data);
-        draw(data);
+    jQuery.get("https://europe-west1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {      
+
+        if (data.length == 0)
+            alert('Out of stock in all stores')
+        else {
+            makeTables(data);
+            draw(data);
+        }
 
     }).fail((e) => {
         alert(e.responseText);

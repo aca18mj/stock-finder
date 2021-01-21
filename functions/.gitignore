@@ -1,3 +1,4 @@
 node_modules/
 allStores.json
 result.json
+.runtimeconfig.json
