@@ -34,12 +34,18 @@ function onButtonClicked() {
     }
 
     loading.setAttribute('style', 'visibility:true');
-    jQuery.get("https://europe-west1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {
-        loading.setAttribute('style', 'visibility:hidden');
+    jQuery.get("https://europe-west1-stockfind-348c3.cloudfunctions.net/check/" + product_code, function (data) {       
         makeTables(data);
         draw(data);
+
+    }).fail((e) => {
+        alert(e.responseText);
+
+    }).always(() => {
+        loading.setAttribute('style', 'visibility:hidden');
     });
 }
+
 
 function testCov() {
     loading.setAttribute('style', 'visibility:true');
@@ -50,6 +56,7 @@ function testCov() {
     });
 }
 
+
 function insertMap() {
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWNhMThtaiIsImEiOiJjanU5eGs5NXcwbnhrNDBwZGw3MmxrdmwxIn0.eu-FlYkpu7WHxL1W45XEwg';
 
@@ -57,6 +64,7 @@ function insertMap() {
         .setView([53.8603, -2.3741], 5.4)
         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 }
+
 
 function clear() {
     for (var i = 0; i < markers.length; i++) {
@@ -69,6 +77,7 @@ function clear() {
     $(document.getElementById('wales_container')).html("");
     $(document.getElementById('nir_container')).html("");
 }
+
 
 function draw(data) {
     for (var i = 0; i < data.length; i++) {
@@ -86,6 +95,7 @@ function draw(data) {
         markers.push(marker);
     }
 }
+
 
 function makeTables(data) {
     container.setAttribute('style', 'visibility:true');
