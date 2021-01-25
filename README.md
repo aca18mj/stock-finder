@@ -6,7 +6,7 @@ Copy the item url from [currys.co.uk](https://www.currys.co.uk/gbuk/index.html)
 
 ![Step 1](Media/stockfinderitem.png)
 ## Step 2
-Go to [currysstockfinder.com](currysstockfinder.com)
+Go to [currysstockfinder.com](www.currysstockfinder.com)
 Paste the url and click the check button
 
 ![Step 2](Media/stockfinder.png)
