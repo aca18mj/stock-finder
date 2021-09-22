@@ -1,3 +1,7 @@
+<p align="center">
+  ⚠ The project is no longer maintained ⚠
+</p>
+
 # stock-find-firebase 🔥
 Web app that allows to find stock of items from Currys Pc World (Official website only allows for checking one specific location)
 # How it works
